@@ -7,7 +7,7 @@
 
 # api keys
 .env
-!.env.development
+!.env.example
 
 # testing
 /coverage
