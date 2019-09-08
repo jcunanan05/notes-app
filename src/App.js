@@ -12,9 +12,13 @@ class App extends Component {
   };
 
   render() {
+    const { state } = this;
     return (
       <div className="app-container">
-        <SidebarComponent />
+        <SidebarComponent
+          selectedNoteIndex={state.selectedNoteIndex}
+          notes={state.notes}
+        />
         <EditorComponent />
       </div>
     );
