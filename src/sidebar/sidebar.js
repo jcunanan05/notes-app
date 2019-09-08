@@ -13,7 +13,7 @@ import { Divider, Button } from "@material-ui/core";
 class SidebarComponent extends Component {
   state = {
     addingNote: false,
-    title: null
+    title: ""
   };
 
   render() {
@@ -22,16 +22,20 @@ class SidebarComponent extends Component {
     return (
       <div className={classes.sidebarContainer}>
         <Button className={classes.newNoteBtn} onClick={this.handleNewNote}>
-          New Note
+          {state.addingNote ? "Cancel" : "New Note"}
         </Button>
         {state.addingNote ? (
           <div>
             <input
               type="text"
+              value={state.title}
               className={classes.newNoteInput}
               placeholder="Enter"
-              onKeyUp={e => this.updateTitle(e.target.value)}
+              onChange={e => this.updateTitle(e.target.value)}
             />
+            <Button className={classes.newNoteSubmitBtn} onClick={this.newNote}>
+              Submit Note
+            </Button>
           </div>
         ) : null}
       </div>
@@ -42,12 +46,17 @@ class SidebarComponent extends Component {
     console.log("clicking new note");
     this.setState(currentState => ({
       ...currentState,
+      title: "",
       addingNote: !currentState.addingNote
     }));
   };
 
-  updateTitle = txt => {
-    console.log("this is txt:", txt);
+  updateTitle = title => {
+    this.setState({ title });
+  };
+
+  newNote = () => {
+    console.log(this.state);
   };
 }
 
