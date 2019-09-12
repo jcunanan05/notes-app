@@ -47,7 +47,7 @@ class SidebarComponent extends Component {
               </Button>
             </div>
           ) : null}
-          ``
+
           <List>
             {notes.map((_note, _index) => (
               <div key={_index}>
@@ -69,7 +69,6 @@ class SidebarComponent extends Component {
   }
 
   handleNewNote = () => {
-    console.log("clicking new note");
     this.setState(currentState => ({
       ...currentState,
       title: "",
@@ -82,12 +81,13 @@ class SidebarComponent extends Component {
   };
 
   newNote = () => {
-    console.log(this.state);
+    this.props.newNote(this.state.title);
+    this.setState({ title: "", addingNote: false });
   };
 
   selectNote = (note, index) => this.props.selectNote(note, index);
 
-  deleteNote = () => console.log("deleting note...");
+  deleteNote = note => this.props.deleteNote(note);
 }
 
 export default withStyles(styles)(SidebarComponent);

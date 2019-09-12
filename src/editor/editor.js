@@ -12,11 +12,20 @@ class EditorComponent extends Component {
     title: "",
     id: ""
   };
+
   render() {
     const { state } = this;
     const { classes } = this.props;
     return (
       <div className={classes.editorContainer}>
+        <BorderColorIcon className={classes.editIcon} />
+        <input
+          type="text"
+          className={classes.titleInput}
+          placeholder="Note title..."
+          value={state.title ? state.title : ""}
+          onChange={e => this.updateTitle(e.target.value)}
+        />
         <ReactQuill
           theme="snow"
           value={state.text}
@@ -26,6 +35,32 @@ class EditorComponent extends Component {
     );
   }
 
+  componentDidMount = () => {
+    const { props } = this;
+    if (!props) return;
+    this.setState({
+      text: props.selectedNote.body,
+      title: props.selectedNote.title,
+      id: props.selectedNote.id
+    });
+  };
+
+  componentDidUpdate = () => {
+    const { props, state } = this;
+    if (props.selectedNote.id !== state.id) {
+      this.setState({
+        text: props.selectedNote.body,
+        title: props.selectedNote.title,
+        id: props.selectedNote.id
+      });
+    }
+  };
+
+  updateTitle = async title => {
+    await this.setState({ title });
+    this.update();
+  };
+
   updateBody = async value => {
     await this.setState({ text: value });
     this.update();
@@ -33,11 +68,10 @@ class EditorComponent extends Component {
 
   update = debounce(() => {
     const { id, text, title } = this.state;
-    console.log("updated text", text);
-    // this.props.noteUpdate(id, {
-    //   title,
-    //   body: text
-    // });
+    this.props.noteUpdate(id, {
+      title,
+      body: text
+    });
   }, 1500);
 }
 
