@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import "./App.css";
-import SidebarComponent from "./sidebar/sidebar";
-import EditorComponent from "./editor/editor";
 
 class App extends Component {
   state = {
@@ -12,26 +10,10 @@ class App extends Component {
   };
 
   render() {
-    const { state } = this;
     return (
-      <div className="app-container">
-        <SidebarComponent
-          selectedNoteIndex={state.selectedNoteIndex}
-          notes={state.notes}
-          deleteNote={this.deleteNote}
-          selectNote={this.selectNote}
-          newNote={this.newNote}
-        />
-
-        {state.selectedNote ? (
-          <EditorComponent
-            selectedNote={state.selectedNote}
-            selectedNoteIndex={state.selectedNoteIndex}
-            notes={state.notes}
-            noteUpdate={this.noteUpdate}
-          />
-        ) : null}
-      </div>
+      <>
+        <h1>Hello React!</h1>
+      </>
     );
   }
 
