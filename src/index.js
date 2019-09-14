@@ -5,6 +5,9 @@ import * as serviceWorker from "./serviceWorker";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
+// css
+import "./_sass/App.scss";
+
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "notes-app-22b35.firebaseapp.com",
