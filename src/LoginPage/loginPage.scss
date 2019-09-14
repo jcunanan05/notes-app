@@ -1,4 +1,5 @@
 .login-page {
+  min-height: 30rem;
   height: 100vh;
   background-image: linear-gradient($color-primary, $color-secondary 97%);
 }
@@ -33,8 +34,8 @@
 @supports (display: grid) {
   .login-page {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
   }
 
   .login-section {
@@ -50,11 +51,27 @@
     }
   }
 
-  // new layout mobile and above
-  // @media only screen and (min-width: $widescreen-min) {
-  //   .login-page {
-  //     grid-template-columns: repeat(5, 1fr);
-  //     grid-template-rows: 1fr;
-  //   }
-  // }
+  // new layout mobile and above. 2-division layout.
+  @media only screen and (min-width: $widescreen-min) {
+    .login-page {
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+
+    .login-section {
+      display: grid;
+      grid-template-rows: repeat(6, 1fr);
+      grid-template-columns: 1fr;
+      grid-column: -1 / -3;
+      grid-row: 1 / 5;
+      background: #ffffff;
+    }
+
+    .login-section__container {
+      grid-row: 2 / 7;
+      align-self: start;
+      justify-self: center;
+      border: none;
+    }
+  }
 }
